@@ -1,0 +1,36 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+.content{
+    width: 50%;
+    margin: 50px auto;
+}
+
+.formSearch{
+    margin: 20px 0;
+}
+
+.formSearch button{
+    border: 1px solid #ced4da;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.infoSearch .card{
+    width: 60%;
+    margin: 20px auto;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.infoSearch .card img{
+    width: 250px;
+    height: 250px;
+    margin: auto;
+}
+
+.infoSearch .card .card-body{
+    padding-bottom: 0;
+}

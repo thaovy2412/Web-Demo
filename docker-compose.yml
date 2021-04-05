@@ -3,7 +3,6 @@ version: '3.8'
 services: 
     nodeapp:
         build: .
-        command: "node index.js"
         environment: 
             - DB_HOST=${DB_HOST}
             - DB_NAME=${DB_NAME}
@@ -15,6 +14,7 @@ services:
             - ${PORT}:${PORT}
         depends_on:
           - "mysqldb"
+        command: bash -c 'while !</dev/tcp/mysqldb/3306; do sleep 1; done; npm start'
     mysqldb:
         image: "mysql"
         env_file: ./.env

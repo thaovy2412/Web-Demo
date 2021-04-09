@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["bash", "-c", "while !</dev/tcp/mysqldb/3306; do sleep 1; done; npm start"]

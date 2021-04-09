@@ -3,24 +3,34 @@ version: '3'
 services: 
     nodeapp:
         build: .
+        env_file: ./.env
         environment: 
-            - DB_HOST=mysqldb
-            - DB_NAME=product
-            - DB_PORT=3306
-            - DB_USER=root
-            - DB_PASS=Thaovy24
-            - PORT=3000
+            - DB_HOST=${DB_HOST}
+            - DB_NAME=${DB_NAME}
+            - DB_PORT=${DB_PORT}
+            - DB_USER=${DB_USER}
+            - DB_PASS=${DB_PASS}
+            - PORT=${PORT}
         ports: 
-            - 3000:3000
+            - ${PORT}:${PORT}
         depends_on:
-          - "mysqldb"
-        command: bash -c 'while !</dev/tcp/mysqldb/3306; do sleep 1; done; npm start'
+            - "mysqldb"
+        volumes: 
+            - nodeapp:/usr/src/app
     mysqldb:
         image: "mysql"
         env_file: ./.env
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: Thaovy24
-            MYSQL_DATABASE: product
+            MYSQL_ROOT_PASSWORD: ${DB_PASS}
+            MYSQL_DATABASE: ${DB_NAME}
         ports:
-            - 3306:3306
+            - ${DB_PORT}:${DB_PORT}
+        volumes: 
+            - db-config:/etc/mysql
+            - db-data:/var/lib/mysql
+
+volumes: 
+  nodeapp:
+  db-config:
+  db-data:

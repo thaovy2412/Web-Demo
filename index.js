@@ -28,8 +28,8 @@ connection.connect((err) => {
   console.log('Connected!!!');
 });
 app.get('/', (req, res) => {
-  if (req.query.masp) {
-    const sql = `SELECT * FROM productlist WHERE maSanPham=${req.query.masp}`;
+  if (req.query.id) {
+    const sql = `SELECT * FROM productlist WHERE maSanPham=${req.query.id}`;
     //let sql = 'SELECT * FROM productlist WHERE maSanPham="' + req.query.masp + '"';
     console.log(sql);
     connection.query(sql, (err, result) => {
@@ -37,17 +37,17 @@ app.get('/', (req, res) => {
         console.log('error', err.sqlMessage);
         res.render('main', {
           errors: err.sqlMessage,
-          masp: req.query.masp,
+          masp: req.query.id,
         });
       } else {
         console.log('result', result);
         if (result.length === 0) {
           res.render('main', {
-            masp: req.query.masp,
+            masp: req.query.id,
           });
         } else {
           res.render('main', {
-            masp: req.query.masp,
+            masp: req.query.id,
             products: result,
           });
         }

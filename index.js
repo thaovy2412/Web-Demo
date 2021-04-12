@@ -23,14 +23,15 @@ app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/css')));
 app.use(express.static(path.join(__dirname, '/img')));
-connection.connect((err) => {
-  if (err) throw err;
-  console.log('Connected!!!');
-});
+
 app.get('/', (req, res) => {
   if (req.query.id) {
-    const sql = `SELECT * FROM productlist WHERE maSanPham=${req.query.id}`;
-    //let sql = 'SELECT * FROM productlist WHERE maSanPham="' + req.query.masp + '"';
+    connection.connect((err) => {
+      if (err) throw err;
+      console.log('Connected!!!');
+    });
+    //const sql = `SELECT * FROM productlist WHERE maSanPham=${req.query.id}`;
+    const sql = 'SELECT * FROM productlist WHERE maSanPham=' + req.query.id;
     console.log(sql);
     connection.query(sql, (err, result) => {
       if (err) {

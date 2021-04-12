@@ -7,7 +7,7 @@ body{
 
 header .navbar{
     padding: 10px 20px;
-    height: 11vh;
+    height: 9vh;
 }
 
 header .navbar .navbar-brand{
@@ -41,7 +41,7 @@ header .navbar .navbar-collapse .navbar-nav .nav-item:last-child{
 
 /* CAROUSEL */
 .carousel{
-    height: 88vh;
+    height: 90vh;
     position: relative;
 }
 

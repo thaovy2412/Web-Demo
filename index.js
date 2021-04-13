@@ -26,10 +26,6 @@ app.use(express.static(path.join(__dirname, '/img')));
 
 app.get('/', (req, response) => {
     if (req.query.id) {
-    // connection.connect((err) => {
-    //   if (err) throw err;
-    //   console.log('Connected!!!');
-    // });
     mycon.connect(function (err){
       mycon.query('SELECT * FROM productlist WHERE maSanPham=' + req.query.id,(err,res)=>{
         if (err) {
@@ -51,30 +47,6 @@ app.get('/', (req, response) => {
         }
       })
     })
-    //const sql = `SELECT * FROM productlist WHERE maSanPham=${req.query.id}`;
-    // const sql = 'SELECT * FROM productlist WHERE maSanPham=' + req.query.id;
-    // console.log(sql);
-    // connection.query(sql, (err, result) => {
-    //   if (err) {
-    //     console.log('error', err.sqlMessage);
-    //     res.render('main', {
-    //       errors: err.sqlMessage,
-    //       masp: req.query.id,
-    //     });
-    //   } else {
-    //     console.log('result', result);
-    //     if (result.length === 0) {
-    //       res.render('main', {
-    //         masp: req.query.id,
-    //       });
-    //     } else {
-    //       res.render('main', {
-    //         masp: req.query.id,
-    //         products: result,
-    //       });
-    //     }
-    //   }
-    // });
   } else {
     response.render('main');
   }

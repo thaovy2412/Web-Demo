@@ -13,18 +13,14 @@ services:
             - PORT=${PORT}
         ports: 
             - ${PORT}:${PORT}
-    mysqldb:
-        image: "mysql"
-        env_file: ./.env
-        restart: unless-stopped
-        environment:
-            MYSQL_ROOT_PASSWORD: ${DB_PASS}
-            MYSQL_DATABASE: ${DB_NAME}
-            MYSQL_ROOT_HOST: "172.17.0.1"
-        ports:
-            - ${DB_PORT}:${DB_PORT}
-
-volumes: 
-  nodeapp:
-  db-config:
-  db-data:
+    database:
+        image: postgres
+        container_name: postgresql
+        environment: 
+            - POSTGRES_PASSWORD=12341234
+        ports: 
+            - 5432:5432
+        volumes: 
+            - postgresql:/var/lib/postgresql/data
+volumes:
+ postgresql:

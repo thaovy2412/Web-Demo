@@ -1,5 +1,5 @@
 FROM node
-ARG DB_HOST=172.29.0.3
+ARG DB_HOST=172.29.0.2
 ARG DB_PORT=3306
 WORKDIR /usr/src/app
 COPY package.json .

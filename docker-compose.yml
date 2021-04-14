@@ -13,10 +13,6 @@ services:
             - PORT=${PORT}
         ports: 
             - ${PORT}:${PORT}
-        depends_on:
-            - "mysqldb"
-        volumes: 
-            - nodeapp:/usr/src/app
     mysqldb:
         image: "mysql"
         env_file: ./.env
@@ -24,11 +20,9 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: ${DB_PASS}
             MYSQL_DATABASE: ${DB_NAME}
+            MYSQL_ROOT_HOST: "172.17.0.1"
         ports:
             - ${DB_PORT}:${DB_PORT}
-        volumes: 
-            - db-config:/etc/mysql
-            - db-data:/var/lib/mysql
 
 volumes: 
   nodeapp:

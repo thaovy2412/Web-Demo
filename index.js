@@ -1,7 +1,7 @@
 const express = require('express');
 
 const app = express();
-const mysql = require('mysql');
+const mysql = require('mysql2');
 require('dotenv').config();
 
 const { PORT } = process.env;
@@ -17,6 +17,7 @@ const mycon = mysql.createConnection({
   database: DB_NAME,
   port: DB_PORT
 });
+console.log(mycon)
 const path = require('path');
 
 app.set('views', path.join(__dirname, '/views'));
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname, '/img')));
 
 app.get('/', (req, response) => {
     if (req.query.id) {
-    mycon.connect(function (err){
+    mycon.connect(function (error){
+if(error) throw error;
       mycon.query('SELECT * FROM productlist WHERE maSanPham=' + req.query.id,(err,res)=>{
         if (err) {
           response.render('main', {

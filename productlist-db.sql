@@ -1,44 +1,25 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 02, 2021 lúc 06:16 PM
--- Phiên bản máy phục vụ: 10.4.14-MariaDB
--- Phiên bản PHP: 7.4.10
+sudo docker exec -it postgresql  bash
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+psql -U postgres
 
+create database product;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+create user root with encrypted password 'Thaovy24';
 
---
--- Cơ sở dữ liệu: `product`
---
+grant all privileges on database product to root;
 
--- --------------------------------------------------------
+\c product
 
---
--- Cấu trúc bảng cho bảng `productlist`
---
+CREATE TABLE productlist (
+  maSanPham int NOT NULL,
+  tenSanPham text NOT NULL,
+  hinhAnh text NOT NULL,
+  soLuong int NOT NULL
+);
 
-CREATE TABLE `productlist` (
-  `maSanPham` int(11) NOT NULL,
-  `tenSanPham` text NOT NULL,
-  `hinhAnh` text NOT NULL,
-  `soLuong` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+grant all privileges on table productlist to root;
 
---
--- Đang đổ dữ liệu cho bảng `productlist`
---
-
-INSERT INTO `productlist` (`maSanPham`, `tenSanPham`, `hinhAnh`, `soLuong`) VALUES
+INSERT INTO productlist (masanPham, tensanPham, hinhanh, soluong) VALUES
 (112, 'iPhone 12 Pro Max', 'https://cdn.tgdd.vn/Products/Images/42/213033/iphone-12-pro-max-xanh-duong-new-600x600-200x200.jpg', 30),
 (113, 'Samsung Galaxy S21 Ultra 5G', 'https://cdn.tgdd.vn/Products/Images/42/226316/samsung-galaxy-s21-ultra-bac-600x600-1-600x600.jpg', 10),
 (114, 'iPhone 12 mini', 'https://cdn.tgdd.vn/Products/Images/42/228741/iphone-mini-do-new-600x600-600x600.jpg', 11),
@@ -49,8 +30,3 @@ INSERT INTO `productlist` (`maSanPham`, `tenSanPham`, `hinhAnh`, `soLuong`) VALU
 (119, 'Realme 6 Pro', 'https://cdn.tgdd.vn/Products/Images/42/214645/realme-6-pro-do-new-600x600-600x600.jpg', 5),
 (120, 'Samsung Galaxy Note 20 Ultra 5G', 'https://cdn.tgdd.vn/Products/Images/42/225063/sam-sung-note-20-ultra-vang-dong-600x600.jpg', 10),
 (121, 'iPhone 12 Pro', 'https://cdn.tgdd.vn/Products/Images/42/213032/iphone-12-pro-bac-new-600x600-600x600.jpg', 18);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

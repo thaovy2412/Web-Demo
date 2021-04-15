@@ -17,7 +17,7 @@ const pgcon = new pg.Client({
     database: DB_NAME,
     port: DB_PORT
 });
-console.log(pgcon)
+
 const path = require('path');
 
 app.set('views', path.join(__dirname, '/views'));
@@ -31,18 +31,18 @@ app.get('/', (req, response) => {
             pgcon.query('SELECT * FROM productlist WHERE maSanPham=' + req.query.id, (err, res) => {
                 if (err) {
                     response.render('main', {
-                        errors: err.sqlMessage,
+                        errors: err.message,
                         masp: req.query.id,
                     });
                 } else {
-                    if (res.length == 0) {
+                    if (res.rows.length == 0) {
                         response.render('main', {
                             masp: req.query.id,
                         });
                     } else {
                         response.render('main', {
                             masp: req.query.id,
-                            products: res,
+                            products: res.rows,
                         });
                     }
                 }
